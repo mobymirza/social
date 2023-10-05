@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="{{ asset ('css/Style.css') }}">
+</head>
+<body>
+
+</body>
+</html>
+
+<div class="login-box">
+    <div class="lb-header">
+        <a href="#" class="active" id="login-box-link">Login</a>
+        <a href="#" id="signup-box-link">Sign Up</a>
+    </div>
+    <div class="social-login">
+        <a href="#">
+            <i class="fa fa-facebook fa-lg"></i>
+            Login in with facebook
+        </a>
+        <a href="#">
+            <i class="fa fa-google-plus fa-lg"></i>
+            log in with Google
+        </a>
+    </div>
+    <form class="email-login" method ="post" action="{{ path('login')}}">
+        <div class="u-form-group">
+            <input type="email" placeholder="Email" name="email">
+        </div>
+
+        <div class="u-form-group">
+            <input type="password" placeholder="Password" name="password">
+        </div>
+
+        <div class="u-form-group">
+            <button>LogIn</button>
+        </div>
+        <div class="u-form-group">
+            <a href="#" class="forgot-password">Forgot password?</a>
+        </div>
+    </form>
+
+    <form class="email-login" method ="post" action="{{ path('logout')}}">
+    <div class="u-form-group">
+        <button>LogOut</button>
+    </div>
+    </form>
+</div>

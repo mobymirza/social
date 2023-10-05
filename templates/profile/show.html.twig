@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="{{ asset ('css/show.css') }}">
+
+</head>
+<body>
+
+<form class="email-login" method ="get" action="{{ path('show_profile', {'user_name': profileUser.userName}) }}">
+<div class="user-header-wrapper">
+    <div class="user-header-inner">
+        <div class="uh-left">
+            <div class="uh-image">
+
+                <div class="gradient">  <img class="image" src="  {{ asset('public/uploads/' ~ profileUser.image) }}" alt=""></div>
+            </div>
+        </div>
+        <div class="uh-right">
+            <div class="user-info">
+                <h3>
+                    {{ profileUser.name }}
+                    <svg class="uname-verified" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1350.03 1326.16">
+                        <defs><style>.cls-11{fill:var(--blue);}.cls-12{fill:#ffffff;}</style></defs><title>verified</title>
+                        <g id="Layer_3" data-name="Layer 3">
+                            <polygon class="cls-11" points="0 747.37 120.83 569.85 70.11 355.04 283.43 292.38 307.3 107.41 554.93 107.41 693.66 0 862.23 120.83 1072.57 126.8 1112.84 319.23 1293.35 399.79 1256.05 614.6 1350.03 793.61 1197.87 941.29 1202.35 1147.15 969.64 1178.48 868.2 1326.16 675.02 1235.17 493.77 1315.72 354.99 1133.73 165.58 1123.29 152.16 878.64 0 747.37"/></g>
+                        <g id="Layer_2" data-name="Layer 2">
+                            <path class="cls-12" d="M755.33,979.23s125.85,78.43,165.06,114c34.93-36,234.37-277.22,308.24-331.94,54.71,21.89,85,73.4,93,80.25-3.64,21.89-321.91,418.58-368.42,445.94-32.74-3.84-259-195.16-275.4-217C689.67,1049.45,725.24,1003.85,755.33,979.23Z" transform="translate(-322.83 -335.95)"/></g>
+                    </svg>
+                </h3>
+            </div>
+            <div class=user-links>
+                <a><span>2.1k</span> Posts</a>
+                <a class="fcc-btn" href="{{ path('profile_edit_page',{'id':profileUser.Id}) }}">followers <span>388</span></a>
+                <a class="fcc-btn" href="{{ path('profile_edit_page',{'id':profileUser.Id}) }}">following <span>388</span></a>
+            </div>
+
+            <div class="user-bio">
+                <p class="user-bio-name">Areal Alien</p>
+                <p>This is the user biography 😄<br/>{{ profileUser.bio }}.</p>
+            </div>
+        </div>
+    </div>
+</div>
+</form>
+
+{% if isFollowed == false %}
+<form class="email-login" method ="post" action="{{ path('add_follower') }}">
+    <input type="hidden" name="id" value="{{profileUser.Id }}">
+    <button type="submit" style="margin-left: 405px">Follow!</button>
+</form>
+{% else %}
+
+    <form class="email-login" method ="post" action="{{ path('unfollow') }}">
+        <input type="hidden" name="id" value="{{profileUser.Id }}">
+        <button type="submit" style="margin-left: 405px">Unfollow!</button>
+    </form>
+{% endif %}
+
+<input type="image" src="submit.gif" alt="Submit" width="48" height="48" style="margin-left: 400px">
+
+
+<div class="user-page-wrapper">
+    <div class="user-page-inner">
+        <div id="imgblock1" class="image-block">
+            <div class="block">
+                <img class="image" src="https://images.unsplash.com/photo-1559056986-f834be7896e5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1955&q=80" alt="">
+            </div>
+            <div id="imgblockbc1" class="block-background"></div>
+        </div>
+        {% for post in posts %}
+
+
+        <div id="img1" class="image-wrapper">
+            <div id="iov1" class="img-overlay-wrapper">
+                <div class="img-btns">
+                    <p>465 <i class="uil uil-heart-alt"></i> &nbsp&nbsp 25 <i class="uil uil-comment"></i></p>
+                </div>
+                <div class="img-overlay"></div>
+            </div>
+            <p>This is the user biography 😄<br/>{{ post.caption }}.</p>
+            <img class="image" src=" {{ asset('public/uploads/' ~ post.image) }}" alt="">
+
+        </div>
+            <div class="user" style="margin-bottom: -400px">
+                <p> <br/>{{ post.caption }}.</p>
+
+                <form class="email-login" method ="post" action="{{ path('comment_store') }}">
+                    <input type="text" id="lname" name="comment"><br><br>
+                    <input type="hidden" name="post_id" value="{{post.Id}}">
+                    <button type="submit" style="margin-bottom: 180px">Comment!</button>
+                </form>
+
+            </div>
+
+
+            <form class="email-login" method ="post" action="{{ path('like_store') }}">
+                <input type="hidden" name="user_id" value="{{profileUser.Id }}">
+                <input type="hidden" name="post_id" value="{{post.Id}}">
+                <button type="submit">LIKE!</button>
+            </form>
+        {% endfor %}
+
+</body>
+</html>

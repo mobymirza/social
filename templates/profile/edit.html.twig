@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="{{ asset ('css/Create.css') }}">
+</head>
+<body>
+<div id="svg_wrap"></div>
+
+<h1>Online Application</h1>
+<form class="email-login" method="post" action="{{ path('update_profile',{'id':profileUser.id}) }}"
+      enctype="multipart/form-data">
+
+    <section>
+        <p>Personal information</p>
+        <input type="hidden" name="id" value="{{ profileUser.id }}">
+        <input type="email" placeholder="Email" name="email" value="{{ profileUser.email }}">
+        <input type="text" placeholder="name" name="name" value="{{ profileUser.name }}">
+        <img class="image" src=" {{ asset('public/uploads/' ~ profileUser.image) }}"
+             style="max-width: 200px; max-height: 200px;">
+        <input type="file" placeholder="image" name="image">
+        <input type="text" placeholder="bio" name="bio" value="{{ profileUser.bio }}">
+    </section>
+    <button>update</button>
+</form>
+</body>
+</html>

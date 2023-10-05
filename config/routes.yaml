@@ -1,0 +1,22 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+user_login_show:
+  path: /login
+  controller: App\src\Controller\Login::showLogin
+  methods: GET
+
+user_login:
+  path: /login
+  controller: App\src\Controller\Login::login
+  methods: POST
+
+user_register_show:
+  path: /registration
+  controller: App\Controller\Registration::showRegistration
+  methods: GET
+
+user_register:
+  path: /registration
+  controller: App\Controller\Registration::register
+  methods: POST

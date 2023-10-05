@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="{{ asset ('css/Create.css') }}">
+
+</head>
+<body>
+
+<div id="svg_wrap"></div>
+
+<h1>Online Application</h1>
+<form class="email-login"   method ="post" action="{{ path('post_store') }}" enctype="multipart/form-data">
+
+    <section>
+        <p>Personal information</p>
+        <input type="file" name="image" id="fileToUpload">
+        <input type="text" placeholder="caption" name="caption">
+    </section>
+    <button>save</button>
+</form>
+
+
+
+
+</body>
+</html>
