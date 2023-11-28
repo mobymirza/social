@@ -1,0 +1,110 @@
+<html>
+<head>
+    <!-- Required meta tags-->
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!-- Your app title -->
+    <title>Lifespace</title>
+    <!-- Path to Framework7 iOS CSS theme styles-->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/framework7/1.6.5/css/framework7.material.min.css">
+    <!-- Path to Framework7 iOS related color styles -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/framework7/1.6.5/css/framework7.material.colors.css">
+    <!-- Path to your custom app styles-->
+    <link rel="stylesheet" href="path/to/my-app.css">
+
+    <!-- Path to your custom app icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ asset ('css/Message.css') }}">
+</head>
+<body>
+<!-- Status bar overlay for full screen mode (PhoneGap) -->
+<div class="statusbar-overlay"></div>
+<!-- Panels overlay-->
+<div class="panel-overlay"></div>
+<!-- Left panel with reveal effect-->
+<div class="panel panel-left panel-reveal">
+    <div class="content-block">
+        <p>Left panel content goes here</p>
+    </div>
+</div>
+<!-- Views -->
+<div class="views">
+    <!-- Your main view, should have "view-main" class -->
+    <div class="view view-main">
+        <!-- Pages container, because we use fixed-through navbar and toolbar, it has additional appropriate classes-->
+        <div class="pages navbar-fixed ">
+            <!-- Page, "data-page" contains page name -->
+            <div data-page="index" class="page">
+                <!-- Top Navbar-->
+                <div class="navbar">
+                    <div class="navbar-inner">
+
+                        <div class="left sliding">
+                            <div class="item-media" style="margin-left:10px; margin-top:10px">
+                                <img src="http://www.iconarchive.com/download/i102645/graphicloads/flat-finance/person.ico"
+                                     width="44"></div>
+                            <div class="item-inner" style="margin-left:10px">
+                                <div class="item-title-row">
+                                    <div class="item-title" style="font-size:18px; line-height:23px">Nombre de usuario
+                                    </div>
+                                </div>
+                                <div class="item-subtitle" style="font-size:14px; line-height:15px">En linea</div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="right">
+                            <!-- Right link contains only icon - additional "icon-only" class
+                              Additional "open-panel" class tells app to open panel when we click on this link-->
+                            <a href="#" class="link icon-only"><i class="material-icons">more_vert</i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- messagebar -->
+                <div class="toolbar messagebar">
+                    <div class="toolbar-inner">
+                        <textarea placeholder="Escribir mensaje"></textarea><a href="#" class="link"><i
+                                    class="material-icons color-blue">send</i></a>
+                    </div>
+                </div>
+
+                <div class="page-content messages-content">
+                    {% for message in messages %}
+                        {% if message.getUserSender.id == currentUserId %}
+                            <div class="messages-date">Sunday, Feb 9 <span>12:58</span></div>
+                            <div class="message message-sent">
+                                <div class="message-text">{{ message.message }}</div>
+                            </div>
+                        {% else %}
+                            <div class="message message-received">
+                            <div class="message-name">{{ message.getUserRecive.name }}</div>
+                            <div class="message-text">{{ message.message }}</div>
+                            <div style="background-image:url(http://lorempixel.com/output/people-q-c-100-100-9.jpg)" class="message-avatar"></div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+</div>
+<!-- Path to Framework7 Library JS-->
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/framework7/1.6.5/js/framework7.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/framework7/1.6.5/js/framework7.js"></script>
+<!-- Path to your app js-->
+<script type="text/javascript" src="path/to/my-app.js"></script>
+<script type="text/javascript" src="{{ asset ('js/Message.js') }}"></script>
+</body>
+</html>              

@@ -8,6 +8,7 @@
 </head>
 <body>
 
+
 <form class="email-login" method ="get" action="{{ path('show_profile', {'user_name': profileUser.userName}) }}">
 <div class="user-header-wrapper">
     <div class="user-header-inner">
@@ -93,8 +94,6 @@
                 </form>
 
             </div>
-
-
             <form class="email-login" method ="post" action="{{ path('like_store') }}">
                 <input type="hidden" name="user_id" value="{{profileUser.Id }}">
                 <input type="hidden" name="post_id" value="{{post.Id}}">
@@ -102,5 +101,20 @@
             </form>
         {% endfor %}
 
+        <form class="email-login" method ="post" action="{{ path('store-message') }}">
+            <input type="text" name="message">
+            <input type="hidden" name="send_id" value="{{profileUser.Id }}">
+            <input type="hidden" name="receive_id" value="">
+            <button type="submit">Send Message !</button>
+        </form>
+{#        <form class="email-login" method ="GET" action="{{ path('show-message') }}">#}
+{#            <input type="text" name="message">#}
+{#            <input type="hidden" name="send_id" value="{{profileUser.Id }}">#}
+{#            <button type="submit">Send nnnMessage !</button>#}
+{#        </form>#}
+
+        <form class="email-login" method ="GET" action="{{ path('show-message') }}">
+            <button type="submit">Direct !</button>
+        </form>
 </body>
 </html>

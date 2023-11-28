@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
@@ -54,6 +55,15 @@ class User
     #[ORM\OneToMany(mappedBy: 'user_id', targetEntity: Comments::class, orphanRemoval: true)]
     private Collection $comments;
 
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $text = null;
+
+    #[ORM\OneToMany(mappedBy: 'user_sender', targetEntity: Message::class)]
+    private Collection $sender;
+
+    #[ORM\OneToMany(mappedBy: 'user_recive', targetEntity: Message::class)]
+    private Collection $recive;
+
     public function __construct(string $email,string $password,string $VerificationCode,string $name,string $image,string $bio,string $user_name)
     {
         $this->email = $email;
@@ -68,6 +78,9 @@ class User
         $this->post = new ArrayCollection();
         $this->likes = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->sender = new ArrayCollection();
+        $this->recive = new ArrayCollection();
+
     }
 
     /**
@@ -310,4 +323,63 @@ class User
         return $this;
     }
 
+    /**
+     * @return Collection<int, Message>
+     */
+    public function getSender(): Collection
+    {
+        return $this->sender;
+    }
+
+    public function addSender(Message $sender): static
+    {
+        if (!$this->sender->contains($sender)) {
+            $this->sender->add($sender);
+            $sender->setUserSender($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSender(Message $sender): static
+    {
+        if ($this->sender->removeElement($sender)) {
+            // set the owning side to null (unless already changed)
+            if ($sender->getUserSender() === $this) {
+                $sender->setUserSender(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Message>
+     */
+    public function getRecive(): Collection
+    {
+        return $this->recive;
+    }
+
+    public function addRecive(Message $recive): static
+    {
+        if (!$this->recive->contains($recive)) {
+            $this->recive->add($recive);
+            $recive->setUserRecive($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRecive(Message $recive): static
+    {
+        if ($this->recive->removeElement($recive)) {
+            // set the owning side to null (unless already changed)
+            if ($recive->getUserRecive() === $this) {
+                $recive->setUserRecive(null);
+            }
+        }
+
+        return $this;
+    }
 }

@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+<ul>
+    {% for message in messages %}
+
+    <li><a href="{{ path("message-user",{contact_id: message.UserRecive.id}) }}"> {{ message.UserRecive.userName}} </a></li>
+
+    {% endfor %}
+
+
+</ul>
+
+</body>
+</html>
