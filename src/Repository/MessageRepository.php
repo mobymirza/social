@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Message;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query\ResultSetMapping;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -26,6 +27,82 @@ class MessageRepository extends ServiceEntityRepository
     {
         $this->getEntityManager()->persist($message);
         $this->getEntityManager()->flush();
+    }
+
+    public function getDirectListOf(int $userId)
+    {
+//        $queryBuilder = $this->getEntityManager()->createQueryBuilder();
+//        $queryBuilder
+//            ->select('u')
+//            ->from(User::class, 'u')
+//            ->where('u.id')
+//            ->join(
+//                '(' .
+//                $queryBuilder->select('m.user_recive AS userId')
+//                    ->from(Message::class, 'm')
+//                    ->where('m.user_sender = :userId')
+//                    ->getDQL() .
+//                ' UNION ' .
+//                $queryBuilder->select('m.user_sender AS userId')
+//                    ->from('Message', 'm')
+//                    ->where('m.user_recive = :userId')
+//                    ->getDQL() .
+//                ')',
+//                'ur',
+//                'WITH',
+//                'u.id = ur.userId'
+//            )
+//            ->setParameter('userId', $userId);
+//
+//        return $queryBuilder->getQuery()->getResult();
+
+
+
+//        $sql = "SELECT u.name,u.name  FROM App\Entity\User u
+//        JOIN (
+//            SELECT user_recive_id AS userId FROM message WHERE user_sender_id = :userId
+//            UNION
+//            SELECT user_sender_id AS userId FROM message WHERE user_recive_id = :userId
+//        ) ur
+//        ON u.id = ur.userId";
+//
+//        $entityManager = $this->getEntityManager();
+//        $query = $entityManager->createQuery($sql);
+//        $query->setParameter('userId', $userId);
+//
+//        return $query->getResult();
+
+
+
+
+
+//        $inner = $conn->createQueryBuilder();
+//        $inner->select('id')
+//            ->from('users');
+//
+//        $outer = $conn->createQueryBuilder();
+//        $outer->select('*')
+//            ->from('(' . $outer->importSubQuery($inner) . ')', 'q');
+//       // JOINing sub-queries:
+//$outer = $conn->createQueryBuilder();
+//$outer->select('*')
+//    ->from('users', 'u')
+//    ->join('q', '(' . $outer->importSubQuery($inner) . ')', 'u', 'q.id = u.id');
+////Using sub-queries in the IN clause:
+//$outer = $conn->createQueryBuilder();
+//$outer->select('*')
+//    ->from('users')
+//    ->where('id IN(' . $outer->importSubQuery($in)
+
+
+
+//        $entityManager = $this->getEntityManager();
+//        $query = $entityManager->createNativeQuery($sql, new ResultSetMapping());
+//
+//        $query->setParameter('userId', $userId);
+//      return  $query->getResult();
+
+
     }
 
     public function selectMessage(User $user_sender): array
@@ -110,3 +187,16 @@ class MessageRepository extends ServiceEntityRepository
 //        ;
 //    }
 }
+
+
+
+//
+//SELECT * user WHERE user.id IN (
+//    SELECT message.user_recive_id
+//        FROM   message
+//        WHERE  message.user_sender_id = 14
+//        UNION
+//        SELECT message.user_sender_id
+//        FROM   message
+//        WHERE  message.user_recive_id = 14
+//)

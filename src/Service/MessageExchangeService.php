@@ -39,6 +39,11 @@ class MessageExchangeService
      return $this->userRepository->find($send_id);
     }
 
+    public function getDirectMessageByUserId(int $userId)
+    {
+        return $this->messageRepository->getDirectListOf($userId);
+    }
+
     public function showUser(int $user_sender)
     {
        return $this->messageRepository->showUser($user_sender);

@@ -12,7 +12,7 @@
 <ul>
     {% for message in messages %}
 
-    <li><a href="{{ path("message-user",{contact_id: message.UserRecive.id}) }}"> {{ message.UserRecive.userName}} </a></li>
+    <li><a href="{{ path("messages.show-single",{contact_id: message.UserRecive.id}) }}"> {{ message.UserRecive.userName}} </a></li>
 
     {% endfor %}
 
