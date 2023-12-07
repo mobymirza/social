@@ -57,7 +57,6 @@ class MessageRepository extends ServiceEntityRepository
 //        return $queryBuilder->getQuery()->getResult();
 
 
-
 //        $sql = "SELECT u.name,u.name  FROM App\Entity\User u
 //        JOIN (
 //            SELECT user_recive_id AS userId FROM message WHERE user_sender_id = :userId
@@ -71,9 +70,6 @@ class MessageRepository extends ServiceEntityRepository
 //        $query->setParameter('userId', $userId);
 //
 //        return $query->getResult();
-
-
-
 
 
 //        $inner = $conn->createQueryBuilder();
@@ -93,7 +89,6 @@ class MessageRepository extends ServiceEntityRepository
 //$outer->select('*')
 //    ->from('users')
 //    ->where('id IN(' . $outer->importSubQuery($in)
-
 
 
 //        $entityManager = $this->getEntityManager();
@@ -118,18 +113,35 @@ class MessageRepository extends ServiceEntityRepository
         return $query->getResult();
     }
 
-    public function showUser(int $user_sender)
+    /**
+     * @return Message[]
+     */
+    public function getMessagesBySenderId(int $senderId): array
     {
         $queryBuilder = $this->getEntityManager()->createQueryBuilder();
         $query = $queryBuilder
             ->select('message')
             ->from(Message::class, 'message')
             ->where('message.user_sender = :userId')
-            ->setParameter('userId', $user_sender)
+            ->setParameter('userId', $senderId)
             ->getQuery();
 
         return $query->getResult();
     }
+
+    public function getMessagesByReceiverId(int $receiverId): array
+    {
+        $queryBuilder = $this->getEntityManager()->createQueryBuilder();
+        $query = $queryBuilder
+            ->select('message')
+            ->from(Message::class, 'message')
+            ->where('message.user_recive = :userId')
+            ->setParameter('userId', $receiverId)
+            ->getQuery();
+
+        return $query->getResult();
+    }
+
 
     public function getMessagesBetweenTwoUsers(int $user1Id, int $user2Id)
     {
@@ -149,8 +161,8 @@ class MessageRepository extends ServiceEntityRepository
                     )
                 )
             )
-            ->setParameter('user1Id',$user1Id)
-            ->setParameter('user2Id',$user2Id)
+            ->setParameter('user1Id', $user1Id)
+            ->setParameter('user2Id', $user2Id)
             ->getQuery();
 
         return $query->getResult();

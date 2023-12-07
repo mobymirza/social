@@ -101,12 +101,12 @@
             </form>
         {% endfor %}
 
-        <form class="email-login" method ="post" action="{{ path('store-message') }}">
-            <input type="text" name="message">
-            <input type="hidden" name="send_id" value="{{profileUser.Id }}">
-            <input type="hidden" name="receive_id" value="">
-            <button type="submit">Send Message !</button>
-        </form>
+{#        <form class="email-login" method ="post" action="{{ path('messages.send') }}">#}
+{#            <input type="text" name="message">#}
+{#            <input type="hidden" name="send_id" value="{{profileUser.Id }}">#}
+{#            <input type="hidden" name="receive_id" value="">#}
+{#            <button type="submit">Send Message !</button>#}
+{#        </form>#}
 {#        <form class="email-login" method ="GET" action="{{ path('show-message') }}">#}
 {#            <input type="text" name="message">#}
 {#            <input type="hidden" name="send_id" value="{{profileUser.Id }}">#}
